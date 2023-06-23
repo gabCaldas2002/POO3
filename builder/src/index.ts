@@ -13,10 +13,10 @@ const truck: Vehicle = builder.getVehicle();
 imprimirDetalhes(truck);
 
 function imprimirDetalhes(vehicle: Vehicle){
-    console.log("Construindo veículo: " + sedan.vehicleType);
-    console.log("Potência: " + sedan.engine.power);
-    console.log("Transmissão: " + sedan.transmission);
-    console.log("Assentos: " + sedan.seats);
-    console.log("Rodas: " + sedan.wheels.length + " aro " + sedan.wheels[0].rim);
+    console.log("Construindo veículo: " + vehicle.vehicleType);
+    console.log("Potência: " + vehicle.engine.power);
+    console.log("Transmissão: " + vehicle.transmission);
+    console.log("Assentos: " + vehicle.seats);
+    console.log("Rodas: " + vehicle.wheels.length + " aro " + vehicle.wheels[0].rim);
     console.log("---------------------------------------------------------------");
 }
