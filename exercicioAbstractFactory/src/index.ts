@@ -4,7 +4,7 @@ import IfoodDelivery from "./deliveries/IfoodDelivery";
 import Company from "./deliveries/consts/Company"
 import IDeliveryFactory from "./deliveries/interface/IDeliveryFactory";
 
-const currentCompanny = Company.AIQFOME;
+const currentCompanny = Company.IFOOD;
 let factory! : IDeliveryFactory;
 
 switch(currentCompanny){
