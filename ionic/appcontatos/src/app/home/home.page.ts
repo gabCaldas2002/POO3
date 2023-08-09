@@ -6,7 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  nome: string = "Gabriel Caldas";
 
-  constructor() {}
+  constructor() {
+    console.log("Testando console");
+  }
 
 }
