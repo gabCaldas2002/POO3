@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Contato } from 'src/app/model/entities/Contato';
 import Genero from 'src/app/model/entities/Genero';
 import { ContatoService } from 'src/app/model/services/contato.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detalhar',
@@ -18,7 +19,7 @@ export class DetalharPage implements OnInit {
   telefone! : number
   edicao : boolean = true;
 
-  constructor(private actRoute : ActivatedRoute, private contatoService: ContatoService) { }
+  constructor(private actRoute : ActivatedRoute, private contatoService: ContatoService, private router : Router) { }
 
   ngOnInit() {
     this.actRoute.params.subscribe((parametros) =>{
@@ -42,8 +43,15 @@ export class DetalharPage implements OnInit {
     }
   }
 
-  editar(){}
+  editar(){
+    let novo: Contato = new Contato(this.nome, this.telefone, this.email, this.genero)
+    this.contatoService.editar(novo, this.indice)
+    this.router.navigate(['/home'])
+  }
 
-  excluir(){}
+  excluir(){
+    this.contatoService.excluir(this.indice);
+    this.router.navigate(['/home'])
+  }
 
 }
