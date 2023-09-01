@@ -1,6 +1,7 @@
 import Genero from "./Genero";
 
 export class Contato{
+    private _id!: string;
     private _nome : string;
     private _telefone : number;
     private _email : string;
@@ -11,6 +12,13 @@ export class Contato{
         this._telefone = telefone;
         this._email = email;
         this._genero = genero
+    }
+
+    public get id(): string {
+        return this._id;
+    }
+    public set id(value: string) {
+        this._id = value;
     }
 
     /**
