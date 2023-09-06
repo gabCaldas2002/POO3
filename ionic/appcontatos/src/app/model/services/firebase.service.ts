@@ -14,7 +14,7 @@ export class FirebaseService {
     return this.firestore.collection(this.PATH).snapshotChanges();
   }
 
-  create(contato : Contato, id: string){
+  create(contato : Contato){
     return this.firestore.collection(this.PATH).add({
       nome: contato.nome,
       telefone: contato.telefone,
