@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Cadastrar um carro
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-input label="Modelo" placeholder="Insira o modelo" [(ngModel)]="modelo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Marca" placeholder="Insira a marca" [(ngModel)]="marca"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Cor" placeholder="Insira a cor" [(ngModel)]="cor"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Ano" placeholder="Insira o ano" [(ngModel)]="ano" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Potência" placeholder="Insira a potência" [(ngModel)]="potencia" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select label="Portas" placeholder="Selecionar" [(ngModel)]="porta">
+        <ion-select-option value="2">Duas portas</ion-select-option>
+        <ion-select-option value="3">Três portas</ion-select-option>
+        <ion-select-option value="4">Quatro portas</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button expand="block" (click)="cadastrar()">Enviar</ion-button>
+  </ion-list>
+</ion-content>
