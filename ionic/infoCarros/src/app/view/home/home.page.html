@@ -9,7 +9,13 @@
 <ion-content>
   <ion-list *ngFor="let carro of lista_carros;">
     <ion-item (click)="editar(carro)">
-      <ion-label>{{carro.modelo}}</ion-label>
+      <ion-avatar *ngIf="carro.downloadURL != null" slot="start">
+        <img src="{{carro.downloadURL}}"/>
+      </ion-avatar>
+      <ion-avatar *ngIf="carro.downloadURL == null" slot="start">
+        <img src="assets/avatar.png"/>
+      </ion-avatar>
+      <ion-label style="margin-left: 5%">{{carro.modelo}}</ion-label>
     </ion-item>
   </ion-list>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">

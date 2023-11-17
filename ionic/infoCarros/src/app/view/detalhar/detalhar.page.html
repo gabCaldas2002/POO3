@@ -11,6 +11,14 @@
     <ion-item>
       <ion-toggle (ionChange)="habilitarEdicao()">Habilitar edição</ion-toggle><br /><br />
     </ion-item>
+    <ion-item *ngIf="carro.downloadURL != null">
+      <img src="{{carro.downloadURL}}"/>
+    </ion-item>
+    <ion-item>
+      <ion-button size="default" color="success" shape="round" disabled="{{edicao}}">
+        <input type="file" (change)="uploadFile($event.target)"/>
+      </ion-button>
+    </ion-item>
     <ion-item>
       <ion-input label="Modelo" placeholder="Insira o modelo" [(ngModel)]="modelo" disabled="{{edicao}}"></ion-input>
     </ion-item>

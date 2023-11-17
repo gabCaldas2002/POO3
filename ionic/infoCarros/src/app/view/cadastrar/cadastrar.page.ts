@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Carro } from 'src/app/model/entities/Carro';
@@ -11,7 +11,7 @@ import { FirebaseService } from 'src/app/model/service/firebase.service';
   styleUrls: ['./cadastrar.page.scss'],
 })
 
-export class CadastrarPage{
+export class CadastrarPage implements OnInit{
   modelo! : string;
   marca! : string;
   cor! : string;
@@ -19,10 +19,15 @@ export class CadastrarPage{
   potencia! : number;
   porta! : Portas
   lista_carros: Carro[] = []
+  public imagem : any;
 
   constructor(private alertController: AlertController, private router: Router, private firebase: FirebaseService){}
 
   ngOnInit(){}
+
+  public uploadFile(imagem: any){
+    this.imagem = imagem.files;
+  }
 
   cadastrar(){
     if(!this.modelo || !this.marca){
@@ -31,6 +36,11 @@ export class CadastrarPage{
     else{
       this.presentAlert("Sucesso", "Contato cadastrado")
       let novo: Carro = new Carro(this.modelo, this.marca, this.cor, this.ano, this.potencia, this.porta)
+      if(this.imagem){
+        this.firebase.uploadImage(this.imagem, novo)
+      }else{
+        this.firebase.create(novo);
+      }
       this.firebase.create(novo);
       this.router.navigate(["/home"])
       console.log(novo)

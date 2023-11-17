@@ -19,6 +19,7 @@ export class DetalharPage implements OnInit {
   potencia! : number;
   porta! : Portas
   edicao : boolean = true;
+  public imagem: any
 
   constructor(private firebase: FirebaseService, private router : Router) { }
 
@@ -33,6 +34,10 @@ export class DetalharPage implements OnInit {
     console.log(this.carro);
   }
 
+  public uploadFile(imagem: any){
+    this.imagem = imagem.files;
+  }
+
   habilitarEdicao(){
     if(this.edicao){
       this.edicao=false;
@@ -43,6 +48,12 @@ export class DetalharPage implements OnInit {
 
   editar(){
     let novo: Carro = new Carro(this.modelo, this.marca, this.cor, this.ano, this.potencia, this.porta)
+    if(this.imagem){
+      this.firebase.uploadImage(this.imagem, novo);
+    }else{
+      novo.downloadURL = this.carro.downloadURL;
+      this.firebase.update(novo, this.carro.id);
+    }
     this.firebase.update(novo, this.carro.id)
     this.router.navigate(['/home'])
   }
