@@ -4,6 +4,7 @@ import { Carro } from 'src/app/model/entities/Carro';
 import Portas from 'src/app/model/entities/Portas';
 import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/model/service/firebase.service';
+import { AuthService } from 'src/app/model/service/auth.service';
 
 @Component({
   selector: 'app-detalhar',
@@ -20,8 +21,11 @@ export class DetalharPage implements OnInit {
   porta! : Portas
   edicao : boolean = true;
   public imagem: any
+  public user: any;
 
-  constructor(private firebase: FirebaseService, private router : Router) { }
+  constructor(private auth: AuthService, private firebase: FirebaseService, private router : Router) { 
+    this.user = this.auth.getUserLogged();
+  }
 
   ngOnInit() {
     this.carro = history.state.carro;
@@ -32,6 +36,7 @@ export class DetalharPage implements OnInit {
     this.potencia = this.carro.potencia;
     this.porta = this.carro.porta;
     console.log(this.carro);
+    
   }
 
   public uploadFile(imagem: any){
@@ -48,6 +53,8 @@ export class DetalharPage implements OnInit {
 
   editar(){
     let novo: Carro = new Carro(this.modelo, this.marca, this.cor, this.ano, this.potencia, this.porta)
+    novo.id = this.carro.id;
+    novo.uid = this.user.uid;
     if(this.imagem){
       this.firebase.uploadImage(this.imagem, novo);
     }else{
