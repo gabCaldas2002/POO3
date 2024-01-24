@@ -12,8 +12,9 @@ export class FirebaseService {
 
   constructor(private firestore : AngularFirestore, private storage : AngularFireStorage) {}
 
-  read(){
-    return this.firestore.collection(this.PATH).snapshotChanges();
+  read(uid: string){
+    return this.firestore.collection(this.PATH, ref => ref.where('uid', '==', uid))
+    .snapshotChanges();
   }
 
   create(carro : Carro){
@@ -23,7 +24,8 @@ export class FirebaseService {
       cor: carro.cor,
       ano: carro.ano,
       potencia: carro.potencia,
-      porta: carro.porta
+      porta: carro.porta,
+      uid: carro.uid
     });
   }
 
@@ -46,7 +48,8 @@ export class FirebaseService {
       cor: carro.cor,
       ano: carro.ano,
       potencia: carro.potencia,
-      porta: carro.porta
+      porta: carro.porta,
+      uid: carro.uid
     });
   }
 
