@@ -7,6 +7,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-button (click)="logout()">
+    <ion-icon name="exit-outline"></ion-icon>
+  </ion-button>
   <ion-list *ngFor="let carro of lista_carros;">
     <ion-item (click)="editar(carro)">
       <ion-avatar *ngIf="carro.downloadURL != null" slot="start">

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Carro } from 'src/app/model/entities/Carro';
 import Portas from 'src/app/model/entities/Portas';
+import { AuthService } from 'src/app/model/service/auth.service';
 import { FirebaseService } from 'src/app/model/service/firebase.service';
 
 @Component({
@@ -11,10 +12,13 @@ import { FirebaseService } from 'src/app/model/service/firebase.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  lista_carros: Carro[] = []
+  lista_carros: Carro[] = [];
+  public user: any;
 
-  constructor(private alertController: AlertController, private router: Router, private firebase: FirebaseService) {
-    this.firebase.read()
+  constructor(private alertController: AlertController, private router: Router, private firebase: FirebaseService, private authService: AuthService) {
+    this.user = this.authService.getUserLogged();
+    console.log(this.authService.getUserLogged());
+    this.firebase.read(this.user.uid)
     .subscribe(res => {
       this.lista_carros = res.map(carro => {
         return {
@@ -31,5 +35,11 @@ export class HomePage {
 
   editar(carro : Carro){
     this.router.navigateByUrl("/detalhar", {state: {carro: carro}});
+  }
+
+  logout(){
+    this.authService.signOut().then((res) => {
+      this.router.navigate(["signin"]);
+    })
   }
 }
