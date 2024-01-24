@@ -9,6 +9,7 @@ export class Carro{
     private _potencia : number;
     private _porta : Portas;
     private _downloadURL : any;
+    private _uid!: string;
 
 
     constructor(modelo: string, marca: string, cor: string, ano: number, potencia: number, porta: Portas){
@@ -129,6 +130,14 @@ export class Carro{
 	public set downloadURL(downloadURL: any) {
 		this._downloadURL = downloadURL;
     }
+
+    public get uid(): string{
+        return this._uid;
+      }
+    
+      public set uid(value: string){
+        this._uid = value;
+      }
 
    
 
