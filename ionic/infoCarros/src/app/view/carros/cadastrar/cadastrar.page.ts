@@ -38,7 +38,7 @@ export class CadastrarPage implements OnInit{
       this.presentAlert("Erro", "Todos os campos são obrigatórios");
     }
     else{
-      this.presentAlert("Sucesso", "Contato cadastrado")
+      this.presentAlert("Sucesso", "Carro cadastrado")
       let novo: Carro = new Carro(this.modelo, this.marca, this.cor, this.ano, this.potencia, this.porta)
       novo.uid = this.user.uid;
       if(this.imagem){
@@ -46,7 +46,6 @@ export class CadastrarPage implements OnInit{
       }else{
         this.firebase.create(novo);
       }
-      this.firebase.create(novo);
       this.router.navigate(["/home"])
       console.log(novo)
     }

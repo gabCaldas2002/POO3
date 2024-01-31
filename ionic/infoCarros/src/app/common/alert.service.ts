@@ -11,7 +11,7 @@ export class AlertService {
 
   async presentAlert(subHeader : string, message : string) {
     const alert = await this.alertController.create({
-      header: 'Agenda de Contatos',
+      header: 'Cadastro de Carros',
       subHeader: subHeader,
       message: message,
       buttons: ['OK'],
@@ -21,7 +21,7 @@ export class AlertService {
 
   simpleLoader(){
     this.loadingController.create({
-      message: "carregando..."
+      message: "Carregando..."
     }).then((response) => {
       response.present();
     })
@@ -29,7 +29,7 @@ export class AlertService {
 
   dismissLoader(){
     this.loadingController.dismiss().then((response) => {
-      console.log('fechou', response);
+      console.log('Fechou', response);
     })
   }
 
