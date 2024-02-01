@@ -37,7 +37,8 @@ export class FirebaseService {
       ano: carro.ano,
       potencia: carro.potencia,
       porta: carro.porta,
-      downloadURL: carro.downloadURL
+      downloadURL: carro.downloadURL,
+      uid: carro.uid
     });
   }
 
@@ -61,7 +62,8 @@ export class FirebaseService {
       ano: carro.ano,
       potencia: carro.potencia,
       porta: carro.porta,
-      downloadURL: carro.downloadURL
+      downloadURL: carro.downloadURL,
+      uid: carro.uid
     });
   }
 

@@ -66,8 +66,9 @@ export class DetalharPage implements OnInit {
   }
 
   editar(){
-      this.alert.presentAlert("Sucesso", "Carro atualizado")
-      let novo: Carro = new Carro(this.modelo, this.marca, this.cor, this.ano, this.potencia, this.porta)
+    const { modelo, marca, cor, ano, potencia, porta} = this.formAtualizar.value;
+    if(modelo && marca && cor && ano && potencia && porta){
+      let novo: Carro = new Carro(modelo, marca, cor, ano, potencia, porta)
       novo.id = this.carro.id;
       novo.uid = this.user.uid;
       if(this.imagem){
@@ -78,6 +79,12 @@ export class DetalharPage implements OnInit {
       }
       this.firebase.update(novo, this.carro.id)
       this.router.navigate(['/home'])
+      this.alert.presentAlert("Sucesso", "Carro atualizado")
+    }
+    else{
+      
+      this.alert.presentAlert("Erro", "Todos os campos são obrigatórios");
+    }
   }
 
   submitForm() : boolean{

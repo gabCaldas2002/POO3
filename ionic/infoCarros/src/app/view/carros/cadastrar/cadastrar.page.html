@@ -10,33 +10,33 @@
   <ion-list>
     <form [formGroup]="formCadastrar" (ngSubmit)="submitForm()">
     <ion-item>
-      <ion-input label="Modelo" placeholder="Insira o modelo" [(ngModel)]="modelo"></ion-input>
+      <ion-input label="Modelo" placeholder="Insira o modelo" formControlName="modelo"></ion-input>
     </ion-item>
     <span *ngIf="formCadastrar.get('modelo')?.touched && formCadastrar.get('modelo')?.errors?.['required']">Modelo é Obrigatório!</span>
     <span *ngIf="formCadastrar.get('modelo')?.touched && formCadastrar.get('modelo')?.hasError('maxLength')">O modelo deve conter no máximo 35 caracteres</span>
     <ion-item>
-      <ion-input label="Marca" placeholder="Insira a marca" [(ngModel)]="marca"></ion-input>
+      <ion-input label="Marca" placeholder="Insira a marca" formControlName="marca"></ion-input>
     </ion-item>
     <span *ngIf="formCadastrar.get('marca')?.touched && formCadastrar.get('marca')?.errors?.['required']">Marca é Obrigatória!</span>
     <span *ngIf="formCadastrar.get('marca')?.touched && formCadastrar.get('marca')?.hasError('maxLength')">A marca deve conter no máximo 20 caracteres</span>
     <ion-item>
-      <ion-input label="Cor" placeholder="Insira a cor" [(ngModel)]="cor"></ion-input>
+      <ion-input label="Cor" placeholder="Insira a cor" formControlName="cor"></ion-input>
     </ion-item>
     <span *ngIf="formCadastrar.get('cor')?.touched && formCadastrar.get('cor')?.errors?.['required']">Cor é Obrigatória!</span>
     <ion-item>
-      <ion-input label="Ano" placeholder="Insira o ano" [(ngModel)]="ano" type="number"></ion-input>
+      <ion-input label="Ano" placeholder="Insira o ano" formControlName="ano" type="number"></ion-input>
     </ion-item>
     <span *ngIf="formCadastrar.get('ano')?.touched && formCadastrar.get('ano')?.errors?.['required']">Ano é Obrigatório!</span>
     <span *ngIf="formCadastrar.get('ano')?.touched && formCadastrar.get('ano')?.hasError('min')">Insira um ano válido!</span>
     <span *ngIf="formCadastrar.get('ano')?.touched && formCadastrar.get('ano')?.hasError('max')">Insira um ano válido!</span>
     <ion-item>
-      <ion-input label="Potência" placeholder="Insira a potência" [(ngModel)]="potencia" type="number"></ion-input>
+      <ion-input label="Potência" placeholder="Insira a potência" formControlName="potencia" type="number"></ion-input>
     </ion-item>
     <span *ngIf="formCadastrar.get('potencia')?.touched && formCadastrar.get('potencia')?.errors?.['required']">Potência é Obrigatória!</span>
     <span *ngIf="formCadastrar.get('potencia')?.touched && formCadastrar.get('potencia')?.hasError('min')">Insira uma potência válida!</span>
     <span *ngIf="formCadastrar.get('potencia')?.touched && formCadastrar.get('potencia')?.hasError('max')">Insira uma potência válida!</span>
     <ion-item>
-      <ion-select label="Portas" placeholder="Selecionar" [(ngModel)]="porta">
+      <ion-select label="Portas" placeholder="Selecionar" formControlName="porta">
         <ion-select-option value="2">Duas portas</ion-select-option>
         <ion-select-option value="3">Três portas</ion-select-option>
         <ion-select-option value="4">Quatro portas</ion-select-option>
@@ -48,7 +48,7 @@
         <input type="file" (change)="uploadFile($event.target)"/>
       </ion-button>
     </ion-item>
-    <ion-button expand="block" (click)="cadastrar()">Enviar</ion-button>
     </form>
+    <ion-button expand="block" (click)="cadastrar()">Enviar</ion-button>
   </ion-list>
 </ion-content>

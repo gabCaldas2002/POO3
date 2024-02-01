@@ -54,8 +54,11 @@
       </ion-select>
     </ion-item>
     <span *ngIf="formAtualizar.get('porta')?.touched && formAtualizar.get('porta')?.errors?.['required']">Porta é Obrigatória!</span>
-    <ion-button expand="block" (click)="editar()" color="secondary"[disabled]="edicao">Salvar</ion-button>
-    <ion-button expand="block" (click)="excluir()" color="danger" [disabled]="edicao">Excluir</ion-button>
     </form>
+    <ion-button size="default" color="success" shape="round">
+      <input type="file" (change)="uploadFile($event.target)"/>
+    </ion-button>
+    <ion-button expand="block" (click)="editar()" color="secondary"disabled="{{edicao}}">Salvar</ion-button>
+    <ion-button expand="block" (click)="excluir()" color="danger" disabled="{{edicao}}">Excluir</ion-button>
   </ion-list>
 </ion-content>

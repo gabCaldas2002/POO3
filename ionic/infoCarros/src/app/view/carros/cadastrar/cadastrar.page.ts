@@ -44,11 +44,11 @@ export class CadastrarPage implements OnInit{
 
   ngOnInit(){
     this.formCadastrar = this.formBuilder.group({
-      modelo : ['', [Validators.required], Validators.maxLength(35)],
-      marca : ['',[Validators.required], Validators.maxLength(20)],
+      modelo : ['', [Validators.required, Validators.maxLength(35)]],
+      marca : ['',[Validators.required, Validators.maxLength(20)]],
       ano : ['',[Validators.required, Validators.min(1900), Validators.max(this.anoAtual)]],
       cor : ['',[Validators.required]],
-      potencia : ['',[Validators.required], Validators.min(30), Validators.max(2000)],
+      potencia : ['',[Validators.required, Validators.min(30), Validators.max(2000)]],
       porta : ['',[Validators.required]]
     })
   }
@@ -69,12 +69,9 @@ export class CadastrarPage implements OnInit{
   }
 
   cadastrar(){
-    if(!this.modelo || !this.marca){
-      this.alert.presentAlert("Erro", "Todos os campos são obrigatórios");
-    }
-    else{
-      this.alert.presentAlert("Sucesso", "Carro cadastrado")
-      let novo: Carro = new Carro(this.modelo, this.marca, this.cor, this.ano, this.potencia, this.porta)
+    const { modelo, marca, cor, ano, potencia, porta} = this.formCadastrar.value;
+    if(modelo && marca && cor && ano && potencia && porta){
+      let novo: Carro = new Carro(modelo, marca, cor, ano, potencia, porta)
       novo.uid = this.user.uid;
       if(this.imagem){
         this.firebase.uploadImage(this.imagem, novo)
@@ -82,7 +79,12 @@ export class CadastrarPage implements OnInit{
         this.firebase.create(novo);
       }
       this.router.navigate(["/home"])
+      this.alert.presentAlert("Sucesso", "Carro cadastrado")
       console.log(novo)
+      
+    }
+    else{
+      this.alert.presentAlert("Erro", "Todos os campos são obrigatórios");
     }
     
   }
