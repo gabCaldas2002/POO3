@@ -5,6 +5,8 @@ import Portas from 'src/app/model/entities/Portas';
 import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/model/service/firebase.service';
 import { AuthService } from 'src/app/model/service/auth.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/common/alert.service';
 
 @Component({
   selector: 'app-detalhar',
@@ -22,21 +24,33 @@ export class DetalharPage implements OnInit {
   edicao : boolean = true;
   public imagem: any
   public user: any;
+  formAtualizar! : FormGroup;
+  anoAtual! : number;
 
-  constructor(private auth: AuthService, private firebase: FirebaseService, private router : Router) { 
+  constructor(private auth: AuthService, private firebase: FirebaseService, private router : Router, private alert : AlertService, private formBuilder : FormBuilder) { 
     this.user = this.auth.getUserLogged();
+    this.formAtualizar = new FormGroup({
+      modelo : new FormControl(''),
+      marca : new FormControl(''),
+      cor : new FormControl(''),
+      ano : new FormControl(''),
+      potencia : new FormControl(''),
+      porta : new FormControl('')
+    })
+    this.anoAtual = new Date().getFullYear();
   }
 
   ngOnInit() {
     this.carro = history.state.carro;
-    this.modelo = this.carro.modelo;
-    this.marca = this.carro.marca;
-    this.cor = this.carro.cor;
-    this.ano = this.carro.ano;
-    this.potencia = this.carro.potencia;
-    this.porta = this.carro.porta;
     console.log(this.carro);
-    
+    this.formAtualizar = this.formBuilder.group({
+      modelo : [this.carro.modelo, [Validators.required, Validators.maxLength(35)]],
+      marca : [this.carro.marca,[Validators.required, Validators.maxLength(20)]],
+      ano : [this.carro.ano,[Validators.required, Validators.min(1900), Validators.max(this.anoAtual)]],
+      cor : [this.carro.cor,[Validators.required]],
+      potencia : [this.carro.potencia,[Validators.required, Validators.min(30), Validators.max(2000)]],
+      porta : [this.carro.porta,[Validators.required]]
+    })
   }
 
   public uploadFile(imagem: any){
@@ -52,17 +66,29 @@ export class DetalharPage implements OnInit {
   }
 
   editar(){
-    let novo: Carro = new Carro(this.modelo, this.marca, this.cor, this.ano, this.potencia, this.porta)
-    novo.id = this.carro.id;
-    novo.uid = this.user.uid;
-    if(this.imagem){
-      this.firebase.uploadImage(this.imagem, novo);
+      this.alert.presentAlert("Sucesso", "Carro atualizado")
+      let novo: Carro = new Carro(this.modelo, this.marca, this.cor, this.ano, this.potencia, this.porta)
+      novo.id = this.carro.id;
+      novo.uid = this.user.uid;
+      if(this.imagem){
+        this.firebase.uploadImage(this.imagem, novo);
+      }else{
+        novo.downloadURL = this.carro.downloadURL;
+        this.firebase.update(novo, this.carro.id);
+      }
+      this.firebase.update(novo, this.carro.id)
+      this.router.navigate(['/home'])
+  }
+
+  submitForm() : boolean{
+    if(!this.formAtualizar.valid){
+      this.alert.presentAlert('Erro', 'Erro ao Preencher!');
+      return false;
     }else{
-      novo.downloadURL = this.carro.downloadURL;
-      this.firebase.update(novo, this.carro.id);
+      this.alert.simpleLoader();
+      this.editar();
+      return true;
     }
-    this.firebase.update(novo, this.carro.id)
-    this.router.navigate(['/home'])
   }
 
   excluir(){ 
