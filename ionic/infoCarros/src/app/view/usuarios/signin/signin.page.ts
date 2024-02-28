@@ -46,7 +46,7 @@ export class SigninPage implements OnInit {
     this.authService.signIn(this.formLogar.value['email'], this.formLogar.value['senha']).then((res)=>{
       this.alert.dismissLoader();
       this.alert.presentAlert('Olá', 'Seja bem-vindo')
-      this.router.navigate(["/home"])
+      this.router.navigate(["/tabs/home"])
     }).catch((error)=>{
       this.alert.dismissLoader();
       this.alert.presentAlert('Erro ao logar', 'Tente novamente')
@@ -58,7 +58,7 @@ export class SigninPage implements OnInit {
   logarComGoogle(){
     this.authService.signInWithGoogle().then((res)=>{
       this.alert.presentAlert('Olá', 'Seja bem-vindo')
-      this.router.navigate(["/home"])
+      this.router.navigate(["/tabs/home"])
     }).catch((error)=>{
       this.alert.presentAlert('Erro', 'Tente novamente')
       console.log(error.message);
@@ -68,7 +68,7 @@ export class SigninPage implements OnInit {
   logarComGithub(){
     this.authService.signInWithGithub().then((res)=>{
       this.alert.presentAlert('Olá', 'Seja bem-vindo')
-      this.router.navigate(["/home"])
+      this.router.navigate(["/tabs/home"])
     }).catch((error)=>{
       this.alert.presentAlert('Erro', 'Tente novamente')
       console.log(error.message);

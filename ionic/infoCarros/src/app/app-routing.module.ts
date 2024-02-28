@@ -3,22 +3,20 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./view/carros/home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: '',
-    redirectTo: 'signin',
-    pathMatch: 'full'
-  },
-  {
-    path: 'cadastrar',
-    loadChildren: () => import('./view/carros/cadastrar/cadastrar.module').then( m => m.CadastrarPageModule)
+    path: 'tabs',
+    loadChildren: () => import('./view/tabs/tabs.module').then( m => m.TabsPageModule),
   },
   {
     path: 'detalhar',
     loadChildren: () => import('./view/carros/detalhar/detalhar.module').then( m => m.DetalharPageModule)
   },
+
+  {
+    path: '',
+    redirectTo: 'signin',
+    pathMatch: 'full'
+  },
+
   {
     path: 'signin',
     loadChildren: () => import('./view/usuarios/signin/signin.module').then( m => m.SigninPageModule)
@@ -27,6 +25,7 @@ const routes: Routes = [
     path: 'signup',
     loadChildren: () => import('./view/usuarios/signup/signup.module').then( m => m.SignupPageModule)
   },
+
 ];
 
 @NgModule({

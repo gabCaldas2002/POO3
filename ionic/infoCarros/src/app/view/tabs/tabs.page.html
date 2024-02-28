@@ -1,0 +1,20 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon name="car-sport-outline"></ion-icon>
+        Carros
+    </ion-tab-button>
+    <ion-tab-button tab="cadastrar">
+      <ion-icon name="add-circle-outline"></ion-icon>
+        Cadastrar
+    </ion-tab-button>
+    <ion-tab-button id="present-alert" (click)="presentLogoutAlert()">
+      <ion-icon name="exit-outline"></ion-icon>
+      Sair
+    </ion-tab-button>
+    <ion-alert
+      id="logout-alert"
+      class="custom-alert"
+    ></ion-alert>
+  </ion-tab-bar>
+</ion-tabs>

@@ -78,7 +78,7 @@ export class DetalharPage implements OnInit {
         this.firebase.update(novo, this.carro.id);
       }
       this.firebase.update(novo, this.carro.id)
-      this.router.navigate(['/home'])
+      this.router.navigate(['/tabs/home'])
       this.alert.presentAlert("Sucesso", "Carro atualizado")
     }
     else{
@@ -100,7 +100,7 @@ export class DetalharPage implements OnInit {
 
   excluir(){ 
     this.firebase.delete(this.carro.id);
-    this.router.navigate(['/home'])
+    this.router.navigate(['/tabs/home'])
   }
 
 }
