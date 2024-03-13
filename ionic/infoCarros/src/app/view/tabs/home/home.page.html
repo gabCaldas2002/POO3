@@ -1,20 +1,21 @@
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
       <ion-title>
-        Catálogo de carros
+        Catálogo
       </ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
+
     <div *ngIf="isLoading">
       <ion-skeleton-text animated style="height: 100vh;"></ion-skeleton-text>
     </div>
 
+    <ion-searchbar animated debounce="800" #searchInput></ion-searchbar>
+
     <ion-list *ngFor="let carro of lista_carros;">
-
       <ion-item (click)="editar(carro)">
-
         <ion-thumbnail *ngIf="carro.downloadURL != null" slot="start">
           <img src="{{carro.downloadURL}}"/>
         </ion-thumbnail>
