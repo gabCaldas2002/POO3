@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/model/service/auth.service';
 })
 export class SigninPage implements OnInit {
   formLogar: FormGroup;
+  isLoading: boolean = false;
 
 
   constructor(private alert: AlertService, private router: Router, private formBuilder: FormBuilder, private authService: AuthService) { 
@@ -21,10 +22,16 @@ export class SigninPage implements OnInit {
   }
 
   ngOnInit() {
-    this.formLogar = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required, Validators.minLength(6)]]
-    })
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.formLogar = this.formBuilder.group({
+        email: ['', [Validators.required, Validators.email]],
+        senha: ['', [Validators.required, Validators.minLength(6)]]
+      })
+
+      this.isLoading = false;
+    }, 3000);
   }
 
   get errorControl(){
