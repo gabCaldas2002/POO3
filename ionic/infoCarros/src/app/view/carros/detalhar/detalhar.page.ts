@@ -26,6 +26,8 @@ export class DetalharPage implements OnInit {
   public user: any;
   formAtualizar! : FormGroup;
   anoAtual! : number;
+  isLoading: boolean = false
+
 
   constructor(private auth: AuthService, private firebase: FirebaseService, private router : Router, private alert : AlertService, private formBuilder : FormBuilder) { 
     this.user = this.auth.getUserLogged();
@@ -40,17 +42,17 @@ export class DetalharPage implements OnInit {
     this.anoAtual = new Date().getFullYear();
   }
 
-  ngOnInit() {
-    this.carro = history.state.carro;
-    console.log(this.carro);
-    this.formAtualizar = this.formBuilder.group({
+  ngOnInit() {      
+      this.carro = history.state.carro;
+      console.log(this.carro);
+      this.formAtualizar = this.formBuilder.group({
       modelo : [this.carro.modelo, [Validators.required, Validators.maxLength(35)]],
       marca : [this.carro.marca,[Validators.required, Validators.maxLength(20)]],
       ano : [this.carro.ano,[Validators.required, Validators.min(1900), Validators.max(this.anoAtual)]],
       cor : [this.carro.cor,[Validators.required]],
       potencia : [this.carro.potencia,[Validators.required, Validators.min(30), Validators.max(2000)]],
       porta : [this.carro.porta,[Validators.required]]
-    })
+      })
   }
 
   public uploadFile(imagem: any){

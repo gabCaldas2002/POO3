@@ -7,6 +7,11 @@
 </ion-header>
 
 <ion-content>
+
+  <div *ngIf="isLoading">
+    <ion-skeleton-text animated style="height: 100vh;"></ion-skeleton-text>
+  </div>
+
   <ion-list>
     <form [formGroup]="formCadastrar" (ngSubmit)="submitForm()">
     <ion-item>

@@ -27,6 +27,8 @@ export class CadastrarPage implements OnInit{
   public imagem : any;
   public user: any;
   anoAtual! : number;
+  isLoading: boolean = false
+
 
   constructor(private alertController: AlertController, private router: Router, private firebase: FirebaseService, private auth: AuthService, private formBuilder : FormBuilder, private alert : AlertService){
     this.user = this.auth.getUserLogged();
@@ -51,6 +53,10 @@ export class CadastrarPage implements OnInit{
       potencia : ['',[Validators.required, Validators.min(30), Validators.max(2000)]],
       porta : ['',[Validators.required]]
     })
+    this.isLoading = true
+    setTimeout(()=>{
+      this.isLoading = false
+    }, 3000)
   }
 
   submitForm() : boolean{

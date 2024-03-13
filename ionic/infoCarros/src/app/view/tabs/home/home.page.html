@@ -7,6 +7,10 @@
 </ion-header>
 
 <ion-content>
+  <div *ngIf="isLoading">
+    <ion-skeleton-text animated style="height: 100vh;"></ion-skeleton-text>
+  </div>
+
   <ion-list *ngFor="let carro of lista_carros;">
     <ion-item (click)="editar(carro)">
       <ion-avatar *ngIf="carro.downloadURL != null" slot="start">
@@ -20,4 +24,8 @@
       <ion-label style="margin-left: 5%">{{carro.potencia}} cv</ion-label>
     </ion-item>
   </ion-list>
+
+  <ion-item-group *ngIf="lista_carros.length > 0">
+    <app-carro *ngFor="let carro of lista_carros;"></app-carro>
+  </ion-item-group>
 </ion-content>
