@@ -1,0 +1,39 @@
+
+span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    margin: 0;
+    padding: 0%;
+}
+
+ion-button{
+    width: 80%;
+    margin-left: 2.2rem;
+    border-radius: 10px;
+    font-size: 1.3rem;
+}
+
+ion-toolbar{
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    ion-title{
+        font-size: 1.3rem;
+    }
+  }
+
+form{
+    margin: 1rem;
+    margin-bottom: 2rem;
+    display:inline;
+    justify-content: space-around;
+    ion-item{
+        font-size: 1.3rem;
+        margin: 1.3rem;
+    } 
+}
+
+
+

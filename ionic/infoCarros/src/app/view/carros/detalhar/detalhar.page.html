@@ -1,8 +1,11 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
       Detalhes
     </ion-title>
+    <ion-buttons tab="home">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -16,46 +19,52 @@
     <ion-item *ngIf="carro.downloadURL != null">
       <img src="{{carro.downloadURL}}"/>
     </ion-item>
-    <ion-item>
+
       <ion-button size="default" color="success" shape="round" [disabled]="edicao">
-        <input type="file" (change)="uploadFile($event.target)"/>
+        <input type="file" (change)="uploadFile($event.target)" />
       </ion-button>
-    </ion-item>
+
     <ion-item>
-      <ion-input label="Modelo" placeholder="Insira o modelo" formControlName="modelo" [disabled]="edicao"></ion-input>
+      <ion-input label="Modelo:" placeholder="Insira o modelo" formControlName="modelo" [disabled]="edicao"></ion-input>
     </ion-item>
     <span *ngIf="formAtualizar.get('modelo')?.touched && formAtualizar.get('modelo')?.errors?.['required']">Modelo é Obrigatório!</span>
     <span *ngIf="formAtualizar.get('modelo')?.touched && formAtualizar.get('modelo')?.hasError('maxLength')">O modelo deve conter no máximo 35 caracteres</span>
+    
     <ion-item>
-      <ion-input label="Marca" placeholder="Insira a marca" formControlName="marca" [disabled]="edicao"></ion-input>
+      <ion-input label="Marca:" placeholder="Insira a marca" formControlName="marca" [disabled]="edicao"></ion-input>
     </ion-item>
     <span *ngIf="formAtualizar.get('marca')?.touched && formAtualizar.get('marca')?.errors?.['required']">Marca é Obrigatória!</span>
     <span *ngIf="formAtualizar.get('marca')?.touched && formAtualizar.get('marca')?.hasError('maxLength')">A marca deve conter no máximo 20 caracteres</span>
+    
     <ion-item>
-      <ion-input label="Cor" placeholder="Insira a cor" formControlName="cor" [disabled]="edicao"></ion-input>
+      <ion-input label="Cor:" placeholder="Insira a cor" formControlName="cor" [disabled]="edicao"></ion-input>
     </ion-item>
     <span *ngIf="formAtualizar.get('cor')?.touched && formAtualizar.get('cor')?.errors?.['required']">Cor é Obrigatória!</span>
+    
     <ion-item>
-      <ion-input label="Ano" placeholder="Insira o ano" formControlName="ano" type="number" [disabled]="edicao"></ion-input>
+      <ion-input label="Ano:" placeholder="Insira o ano" formControlName="ano" type="number" [disabled]="edicao"></ion-input>
     </ion-item>
     <span *ngIf="formAtualizar.get('ano')?.touched && formAtualizar.get('ano')?.errors?.['required']">Ano é Obrigatório!</span>
     <span *ngIf="formAtualizar.get('ano')?.touched && formAtualizar.get('ano')?.hasError('min')">Insira um ano válido!</span>
     <span *ngIf="formAtualizar.get('ano')?.touched && formAtualizar.get('ano')?.hasError('max')">Insira um ano válido!</span>
+    
     <ion-item>
-      <ion-input label="Potência" placeholder="Insira a potência" formControlName="potencia" type="number" [disabled]="edicao"></ion-input>
+      <ion-input label="Potência:" placeholder="Insira a potência" formControlName="potencia" type="number" [disabled]="edicao"></ion-input>
     </ion-item>
     <span *ngIf="formAtualizar.get('potencia')?.touched && formAtualizar.get('potencia')?.errors?.['required']">Potência é Obrigatória!</span>
     <span *ngIf="formAtualizar.get('potencia')?.touched && formAtualizar.get('potencia')?.hasError('min')">A potência deve ser um número entre 30 e 2000</span>
     <span *ngIf="formAtualizar.get('potencia')?.touched && formAtualizar.get('potencia')?.hasError('max')">A potência deve ser um número entre 30 e 2000</span>
+    
     <ion-item>
-      <ion-select label="Portas" placeholder="Selecionar" formControlName="porta" [disabled]="edicao">
+      <ion-select label="Portas:" placeholder="Selecionar" formControlName="porta" [disabled]="edicao">
         <ion-select-option value="2">Duas portas</ion-select-option>
         <ion-select-option value="3">Três portas</ion-select-option>
         <ion-select-option value="4">Quatro portas</ion-select-option>
       </ion-select>
     </ion-item>
     <span *ngIf="formAtualizar.get('porta')?.touched && formAtualizar.get('porta')?.errors?.['required']">Porta é Obrigatória!</span>
-    </form>
+    
+  </form>
     <ion-button expand="block" (click)="editar()" color="secondary"disabled="{{edicao}}">Salvar</ion-button>
     <ion-button expand="block" (click)="excluir()" color="danger" disabled="{{edicao}}">Excluir</ion-button>
   </ion-list>
