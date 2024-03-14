@@ -7,14 +7,14 @@
   </ion-header>
 
   <ion-content>
-
     <div *ngIf="isLoading">
       <ion-skeleton-text animated style="height: 100vh;"></ion-skeleton-text>
     </div>
+    <ion-item-group *ngIf="lista_carros.length > 0" style="margin-top: 2%;">
+      <ion-searchbar #mySearchbar animated debounce="800" #searchInput (ionChange)="onSearchChange($event)"></ion-searchbar>
+    </ion-item-group>
 
-    <ion-searchbar animated debounce="800" #searchInput></ion-searchbar>
-
-    <ion-list *ngFor="let carro of lista_carros;">
+    <ion-list *ngFor="let carro of carrosBuscados;">
       <ion-item (click)="editar(carro)">
         <ion-thumbnail *ngIf="carro.downloadURL != null" slot="start">
           <img src="{{carro.downloadURL}}"/>

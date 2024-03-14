@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Carro } from 'src/app/model/entities/Carro';
-import Portas from 'src/app/model/entities/Portas';
 import { AuthService } from 'src/app/model/service/auth.service';
 import { FirebaseService } from 'src/app/model/service/firebase.service';
 
@@ -13,10 +12,10 @@ import { FirebaseService } from 'src/app/model/service/firebase.service';
 })
 export class HomePage implements OnInit {
   lista_carros: Carro[] = [];
+  carrosBuscados: Carro[] = [];
   public user: any;
-
   isLoading: boolean = false;
-  banners: any[] = [];
+  query: string = '';
 
   constructor(
     private alertController: AlertController,
@@ -30,19 +29,16 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-
-    setTimeout(() => {
-      this.firebase.read(this.user.uid).subscribe((res) => {
-        this.lista_carros = res.map((carro) => {
-          return {
-            id: carro.payload.doc.id,
-            ...(carro.payload.doc.data() as any),
-          } as Carro;
-        });
+    this.firebase.read(this.user.uid).subscribe((res) => {
+      this.lista_carros = res.map((carro) => {
+        return {
+          id: carro.payload.doc.id,
+          ...(carro.payload.doc.data() as any),
+        } as Carro;
       });
-
+      this.carrosBuscados = [...this.lista_carros];
       this.isLoading = false;
-    }, 3000);
+    });
   }
 
   irParaCadastrar() {
@@ -51,5 +47,17 @@ export class HomePage implements OnInit {
 
   editar(carro: Carro) {
     this.router.navigateByUrl('/detalhar', { state: { carro: carro } });
+  }
+
+  async onSearchChange(event: any) {
+    this.query = event.detail.value.toLowerCase();
+    if (this.query.length > 0) {
+      this.carrosBuscados = this.lista_carros.filter((carro: Carro) =>
+        carro.modelo.toLowerCase().includes(this.query) ||
+        carro.marca.toLowerCase().includes(this.query)
+      );
+    } else {
+      this.carrosBuscados = [...this.lista_carros];
+    }
   }
 }
