@@ -7,35 +7,13 @@
   </ion-header>
 
   <ion-content>
-    <div *ngIf="isLoading">
-      <ion-skeleton-text animated style="height: 100vh;"></ion-skeleton-text>
-    </div>
+
     <ion-item-group *ngIf="lista_carros.length > 0" style="margin-top: 2%;">
       <ion-searchbar #mySearchbar animated debounce="800" #searchInput (ionChange)="onSearchChange($event)"></ion-searchbar>
     </ion-item-group>
 
-    <ion-list *ngFor="let carro of carrosBuscados;">
-      <ion-item (click)="editar(carro)">
-        <ion-thumbnail *ngIf="carro.downloadURL != null" slot="start">
-          <img src="{{carro.downloadURL}}"/>
-        </ion-thumbnail>
-        <ion-thumbnail *ngIf="carro.downloadURL == null" slot="start">
-          <img src="assets/avatar.png"/>
-        </ion-thumbnail> 
-        
-        <ion-label>
-          <h4 class="ion-text-wrap">{{carro.modelo}}</h4>
-          <ion-text color="medium">
-            <p>- {{carro.marca}}</p>
-            <p>- {{carro.potencia}} cv</p>
-            <p>- {{carro.ano}}</p>
-          </ion-text>
-        </ion-label>
+    <app-loading-carros *ngIf="isLoading"></app-loading-carros>
+    <app-empty-carros *ngIf="carrosBuscados.length === 0 && !isLoading"></app-empty-carros>
+    <app-carro *ngFor="let carro of carrosBuscados" [carro]="carro" (click)="editar(carro)"></app-carro>
 
-      </ion-item>
-    </ion-list>
-
-    <!--<ion-item-group *ngIf="lista_carros.length > 0">
-      <app-carro *ngFor="let carro of lista_carros;"></app-carro>
-    </ion-item-group>-->
   </ion-content>
