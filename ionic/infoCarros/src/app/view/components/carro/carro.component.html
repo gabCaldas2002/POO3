@@ -1,13 +1,17 @@
-<ion-list *ngFor="let carro of lista_carros;">
-  <ion-item (click)="editar(carro)">
-    <ion-avatar *ngIf="carro.downloadURL != null" slot="start">
-      <img src="{{carro.downloadURL}}"/>
-    </ion-avatar>
-    <ion-avatar *ngIf="carro.downloadURL == null" slot="start">
-      <img src="assets/avatar.png"/>
-    </ion-avatar>
-    <ion-label style="margin-left: 5%">{{carro.modelo}}</ion-label>
-    <ion-label style="margin-left: 5%">{{carro.marca}}</ion-label>
-    <ion-label style="margin-left: 5%">{{carro.potencia}} cv</ion-label>
-  </ion-item>
-</ion-list>
+<ion-item>
+  <ion-thumbnail *ngIf="carro.downloadURL != null" slot="start">
+    <img src="{{carro.downloadURL}}"/>
+  </ion-thumbnail>
+  <ion-thumbnail *ngIf="carro.downloadURL == null" slot="start">
+    <img src="assets/avatar.png"/>
+  </ion-thumbnail> 
+  <ion-label>
+    <h4 class="ion-text-wrap">{{carro.modelo}}</h4>
+    <ion-text color="medium">
+      <p>- {{carro.marca}}</p>
+      <p>- {{carro.potencia}} cv</p>
+      <p>- {{carro.ano}}</p>
+    </ion-text>
+  </ion-label>
+
+</ion-item>
